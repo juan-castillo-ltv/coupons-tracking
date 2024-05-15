@@ -4,6 +4,7 @@ import psycopg2.pool
 import logging
 from flask_cors import CORS
 import logging
+import datetime
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s]: %(message)s', handlers=[logging.StreamHandler()])
 from config import DB_CREDENTIALS
 
@@ -57,7 +58,8 @@ def track_event():
     # finally:
     #     cur.close()
     #     connection_pool.putconn(conn)
-    logging.info(f"Received webhook data: {event_data}")
+    timestamp = datetime.datetime.now().isoformat()
+    logging.info(f"Received webhook data at {timestamp} : {event_data}")
     return jsonify({"success": "webhook tracked succesfuly"}), 200
 
 if __name__ == '__main__':
