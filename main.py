@@ -48,7 +48,7 @@ def track_event():
             event_data.get('coupon_redeemed')
         ))
         conn.commit()
-        logging.info(event_data)
+        logging.info(f"Received webhook data at {formatted_timestamp} : {event_data}")
     except Exception as e:
         logging.error(f"Failed to insert event data: {e}")
         conn.rollback()
@@ -57,7 +57,6 @@ def track_event():
         cur.close()
         connection_pool.putconn(conn)
     
-    logging.info(f"Received webhook data at {formatted_timestamp} : {event_data}")
     return jsonify({"success": "webhook tracked succesfuly"}), 200
 
 if __name__ == '__main__':
