@@ -58,8 +58,9 @@ def track_event():
     # finally:
     #     cur.close()
     #     connection_pool.putconn(conn)
-    timestamp = datetime.datetime.now().isoformat()
-    logging.info(f"Received webhook data at {timestamp} : {event_data}")
+    timestamp = datetime.datetime.now()
+    formatted_timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
+    logging.info(f"Received webhook data at {formatted_timestamp} : {event_data}")
     return jsonify({"success": "webhook tracked succesfuly"}), 200
 
 if __name__ == '__main__':
