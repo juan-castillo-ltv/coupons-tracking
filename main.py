@@ -61,8 +61,8 @@ def track_event():
         'content_type' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('content_type'),
         'stat_type' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('stat_type'),
     }
-    logging.info(f"Received webhook data at {event_data.get('data').get('item').get('created_at')} : {event_data}")
-    logging.info(f"Cleand data: {needed_data}")
+    logging.info(f"Received PC webhook data at {event_data.get('data').get('item').get('created_at')} : {event_data}")
+    logging.info(f"Cleand PC data: {needed_data}")
     return jsonify({"success": "webhook tracked succesfuly"}), 200
 
 if __name__ == '__main__':
