@@ -29,34 +29,34 @@ def track_event():
     if not event_data:
         return jsonify({"error": "Invalid data"}), 400
 
-    conn = connection_pool.getconn()
-    if conn is None:
-        logging.error("Failed to connect to the database")
-        return jsonify({"error": "Database connection error"}), 500
+    # conn = connection_pool.getconn()
+    # if conn is None:
+    #     logging.error("Failed to connect to the database")
+    #     return jsonify({"error": "Database connection error"}), 500
     
-    cur = conn.cursor()
-    try:
-        cur.execute("""
-            INSERT INTO coupons_redeemed (created_at_utc,email, name, shop_url, app, coupon_redeemed)
-            VALUES (%s, %s, %s, %s, %s, %s)
-        """, (
-            formatted_timestamp,
-            event_data.get('email'),
-            event_data.get('name'),
-            event_data.get('shop_url'),
-            event_data.get('app'),
-            event_data.get('coupon_redeemed')
-        ))
-        conn.commit()
-        logging.info(f"Received webhook data at {formatted_timestamp} : {event_data}")
-    except Exception as e:
-        logging.error(f"Failed to insert event data: {e}")
-        conn.rollback()
-        return jsonify({"error": "Failed to insert event data"}), 500
-    finally:
-        cur.close()
-        connection_pool.putconn(conn)
-    
+    # cur = conn.cursor()
+    # try:
+    #     cur.execute("""
+    #         INSERT INTO coupons_redeemed (created_at_utc,email, name, shop_url, app, coupon_redeemed)
+    #         VALUES (%s, %s, %s, %s, %s, %s)
+    #     """, (
+    #         formatted_timestamp,
+    #         event_data.get('email'),
+    #         event_data.get('name'),
+    #         event_data.get('shop_url'),
+    #         event_data.get('app'),
+    #         event_data.get('coupon_redeemed')
+    #     ))
+    #     conn.commit()
+    #     logging.info(f"Received webhook data at {formatted_timestamp} : {event_data}")
+    # except Exception as e:
+    #     logging.error(f"Failed to insert event data: {e}")
+    #     conn.rollback()
+    #     return jsonify({"error": "Failed to insert event data"}), 500
+    # finally:
+    #     cur.close()
+    #     connection_pool.putconn(conn)
+    logging.info(f"Received webhook data at {formatted_timestamp} : {event_data}")
     return jsonify({"success": "webhook tracked succesfuly"}), 200
 
 if __name__ == '__main__':
