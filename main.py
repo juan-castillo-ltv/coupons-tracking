@@ -23,8 +23,8 @@ connection_pool = psycopg2.pool.SimpleConnectionPool(1, 10,  # minconn, maxconn
 
 @app.route('/pc', methods=['POST'])
 def track_event():
-    timestamp = datetime.datetime.now()
-    formatted_timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
+    #timestamp = datetime.datetime.now()
+    #formatted_timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
     event_data = request.get_json()
     if not event_data:
         return jsonify({"error": "Invalid data"}), 400
@@ -56,7 +56,13 @@ def track_event():
     # finally:
     #     cur.close()
     #     connection_pool.putconn(conn)
-    logging.info(f"Received webhook data at {formatted_timestamp} : {event_data}")
+    needed_data = {
+        'created_at_utc': event_data.get('data').get('item').get('created_at'),
+        'content_type' : event_data.get('data').get('item').get('content_stat').get('content_type'),
+        'stat_type' : event_data.get('data').get('item').get('content_stat').get('stat_type'),
+    }
+    logging.info(f"Received webhook data at {event_data.get('data').get('item').get('created_at')} : {event_data}")
+    logging.info(f"Cleand data: {needed_data}")
     return jsonify({"success": "webhook tracked succesfuly"}), 200
 
 if __name__ == '__main__':
