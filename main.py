@@ -21,7 +21,7 @@ connection_pool = psycopg2.pool.SimpleConnectionPool(1, 10,  # minconn, maxconn
                                                      password=DB_CREDENTIALS['password'],
                                                      sslmode=DB_CREDENTIALS['sslmode'])
 
-@app.route('/track', methods=['POST'])
+@app.route('/pc', methods=['POST'])
 def track_event():
     timestamp = datetime.datetime.now()
     formatted_timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
