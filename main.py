@@ -60,6 +60,11 @@ def track_pc_email_stat():
         'created_at_utc': event_data.get('data',{}).get('item',{}).get('created_at'),
         'content_type' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('content_type'),
         'stat_type' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('stat_type'),
+        'email_series' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('series_title'),
+        'email_title' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('content_title'),
+        'name' : event_data.get('data',{}).get('item',{}).get('contact',{}).get('name'),
+        'email' : event_data.get('data',{}).get('item',{}).get('contact',{}).get('email'),
+        'shop_url' : event_data.get('data',{}).get('item',{}).get('contact',{}).get('custom_attributes',{}).get('shop_url')
     }
     logging.info(f"Received PC webhook data at {event_data.get('data',{}).get('item',{}).get('created_at',{})} : {event_data}")
     logging.info(f"Clean PC data: {needed_data}")
@@ -77,6 +82,11 @@ def track_icu_email_stat():
         'created_at_utc': event_data.get('data',{}).get('item',{}).get('created_at'),
         'content_type' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('content_type'),
         'stat_type' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('stat_type'),
+        'email_series' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('series_title'),
+        'email_title' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('content_title'),
+        'name' : event_data.get('data',{}).get('item',{}).get('contact',{}).get('name'),
+        'email' : event_data.get('data',{}).get('item',{}).get('contact',{}).get('email'),
+        'shop_url' : event_data.get('data',{}).get('item',{}).get('contact',{}).get('custom_attributes',{}).get('shop_url')
     }
     logging.info(f"Received ICU webhook data at {event_data.get('data',{}).get('item',{}).get('created_at',{})} : {event_data}")
     logging.info(f"Clean ICU data: {needed_data}")
