@@ -22,7 +22,7 @@ connection_pool = psycopg2.pool.SimpleConnectionPool(1, 10,  # minconn, maxconn
                                                      sslmode=DB_CREDENTIALS['sslmode'])
 
 @app.route('/pc', methods=['POST'])
-def track_event():
+def track_pc_email_stat():
     #timestamp = datetime.datetime.now()
     #formatted_timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
     event_data = request.get_json()
@@ -66,7 +66,7 @@ def track_event():
     return jsonify({"success": "webhook tracked succesfuly"}), 200
 
 @app.route('/icu', methods=['POST'])
-def track_event():
+def track_icu_email_stat():
     #timestamp = datetime.datetime.now()
     #formatted_timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
     event_data = request.get_json()
