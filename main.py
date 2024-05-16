@@ -57,9 +57,9 @@ def track_event():
     #     cur.close()
     #     connection_pool.putconn(conn)
     needed_data = {
-        'created_at_utc': event_data.get('data').get('item').get('created_at'),
-        'content_type' : event_data.get('data').get('item').get('content_stat').get('content_type'),
-        'stat_type' : event_data.get('data').get('item').get('content_stat').get('stat_type'),
+        'created_at_utc': event_data.get('data',{}).get('item',{}).get('created_at'),
+        'content_type' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('content_type'),
+        'stat_type' : event_data.get('data',{}).get('item',{}).get('content_stat',{}).get('stat_type'),
     }
     logging.info(f"Received webhook data at {event_data.get('data').get('item').get('created_at')} : {event_data}")
     logging.info(f"Cleand data: {needed_data}")
